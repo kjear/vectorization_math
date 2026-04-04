@@ -1,12 +1,6 @@
 #include "foye_fastmath_fp32.hpp"
 
-#if defined(_MSC_VER)
-#	define FY_FORCEINLINE __forceinline
-#else
-#	define FY_FORCEINLINE inline __attribute__((always_inline))
-#endif
-
-static FY_FORCEINLINE __m256 exp_build_poly(__m256 reduced, __m256 reduced_sq) noexcept
+static __m256 exp_build_poly(__m256 reduced, __m256 reduced_sq) noexcept
 {
 	const __m256 poly_c0 = _mm256_set1_ps(1.9875691500E-4f);
 	const __m256 poly_c1 = _mm256_set1_ps(1.3981999507E-3f);
@@ -26,7 +20,7 @@ static FY_FORCEINLINE __m256 exp_build_poly(__m256 reduced, __m256 reduced_sq) n
 		_mm256_fmadd_ps(p1, reduced_sq, p0));
 }
 
-static FY_FORCEINLINE __m256 exp_special_only(__m256 input) noexcept
+static __m256 exp_special_only(__m256 input) noexcept
 {
 	const __m256 zero = _mm256_setzero_ps();
 	const __m256 overflow_input = _mm256_set1_ps(88.72283935546875f);
@@ -47,7 +41,7 @@ static FY_FORCEINLINE __m256 exp_special_only(__m256 input) noexcept
 	return result;
 }
 
-static FY_FORCEINLINE __m256 exp_finalize_special(__m256 result, __m256 input) noexcept
+static __m256 exp_finalize_special(__m256 result, __m256 input) noexcept
 {
 	const __m256 zero = _mm256_setzero_ps();
 	const __m256 overflow_input = _mm256_set1_ps(88.72283935546875f);
@@ -69,7 +63,7 @@ static FY_FORCEINLINE __m256 exp_finalize_special(__m256 result, __m256 input) n
 	return result;
 }
 
-static FY_FORCEINLINE __m256 exp_finalize_subnormal(
+static __m256 exp_finalize_subnormal(
 	__m256 result,
 	__m256 exp_reduced,
 	__m256i exponent_int,
@@ -102,7 +96,7 @@ static FY_FORCEINLINE __m256 exp_finalize_subnormal(
 	return _mm256_blendv_ps(result, subnormal_result, _mm256_castsi256_ps(subnormal_mask_i));
 }
 
-static FY_FORCEINLINE __m256 exp_slow_path(
+static __m256 exp_slow_path(
 	__m256 input,
 	__m256 exp_reduced,
 	__m256 normal_result,
