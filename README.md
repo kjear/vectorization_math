@@ -5,7 +5,6 @@ All core functions in this library operate on `__m256` vectors and have been **v
 
 ## ✨ Key Features
 
-- **Fully vectorized computation**: Core functions take and return `__m256`, processing 8 single-precision floating-point values at once and making full use of SIMD instructions (AVX2, FMA).
 - **Exhaustive accuracy validation**: Every completed core function has been rigorously tested over the **entire IEEE-754 binary32 input space**, including NaNs, infinities, signed zeros, subnormals, and all edge cases.
 - **High accuracy guarantees**:
   - For all completed functions, the **maximum ULP error** is typically within 1–4 ULPs, while the **mean ULP error** is far below 0.5 ULP.
@@ -13,7 +12,6 @@ All core functions in this library operate on `__m256` vectors and have been **v
 - **High-performance implementation**:
   - Core algorithms use carefully optimized Remez polynomial approximations.
   - Friendly dispatch logic selects the best algorithmic path for different input ranges.
-  - Extensive use of FMA instructions such as `_mm256_fmadd_ps` reduces instruction count and improves accuracy.
 - **Easy-to-use batch interfaces**: In addition to the low-level `__m256` interface, the library provides C++-style pointer/length interfaces such as `fy::exp(len, in, out)`, which automatically handle tail elements and unaligned memory.
 - **Transparent development status**: Macros such as `foyemath_conditional` and `foyemath_experimental` clearly indicate the maturity and stability level of features.
 
