@@ -23,14 +23,14 @@ Unlike scalar implementations in standard math libraries (such as glibc), all co
 
 Below is a snapshot of accuracy results for several functions under exhaustive single-precision testing (test platform: AMD EPYC 9654):
 
-| Function | max ULP error | mean ULP error | ratio ULP distance ≤1 | count inexact ulp err |
-| :--- | :--- | :--- | :--- | :--- |
-| `exp` | 1.04 | 0.033 | 99.60% | 827,231,721 |
-| `log` | 1.00 | 0.125 | 99.68% | 1 |
-| `sin` | 2.75 | 0.146 | 97.64% | 16,777,218 |
-| `cos` | 2.75 | 0.148 | 97.12% | 16,777,216 |
-| `tan` | 4.04 | 0.193 | 87.26% | 16,777,218 |
-| `asinh` | 1.78 | 0.176 | 99.87% | 0 |
+| Function | max ULP error | mean ULP error | ratio ULP distance ≤1 |
+| :--- | :--- | :--- | :--- |
+| `exp` | 1.04 | 0.033 | 99.60% |
+| `log` | 1.00 | 0.125 | 99.68% |
+| `sin` | 2.75 | 0.146 | 97.64% |
+| `cos` | 2.75 | 0.148 | 97.12% |
+| `tan` | 4.04 | 0.193 | 87.26% |
+| `asinh` | 1.78 | 0.176 | 99.87% |
 
 > **Notes**
 > - **ULP error**: Continuous real-valued error, capable of distinguishing finer differences such as "0.6 ULP".
