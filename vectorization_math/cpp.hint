@@ -1,8 +1,0 @@
-// 提示文件帮助 Visual Studio IDE 解释 Visual C++ 标识符,
-// 如函数和宏的名称。
-// 有关详细信息，请参见 https://go.microsoft.com/fwlink/?linkid=865984
-#define INTERNAL_FOYE_DEFINE_ARRAY_PROCESS_FUNCTION_1IN_1OUT(function_name, vsuffix, vtype, stype) void foye_array_##function_name(std::size_t length, const stype* __restrict memaddr_in, stype* __restrict memaddr_out) { constexpr std::size_t simd_width = (sizeof(vtype) / sizeof(stype)); std::size_t i = 0; for (; i + simd_width <= length; i += simd_width) { vtype vsrc = _mm256_loadu_##vsuffix(memaddr_in + i); vtype vres = ::fy::simd::intrinsic::function_name(vsrc); _mm256_storeu_##vsuffix(memaddr_out + i, vres); } const std::size_t remain = length - i; if (remain > 0) { alignas(32) stype tmp_in[simd_width] = {}; alignas(32) stype tmp_out[simd_width] = {}; std::memcpy(tmp_in, memaddr_in + i, remain * sizeof(stype)); vtype vsrc = _mm256_load_##vsuffix(tmp_in); vtype vres = ::fy::simd::intrinsic::function_name(vsrc); _mm256_store_##vsuffix(tmp_out, vres); std::memcpy(memaddr_out + i, tmp_out, remain * sizeof(stype)); } }
-// 提示文件帮助 Visual Studio IDE 解释 Visual C++ 标识符,
-// 如函数和宏的名称。
-// 有关详细信息，请参见 https://go.microsoft.com/fwlink/?linkid=865984
-#define foyemath_experimental [[deprecated( "The mild random testing used during development has passed, " "but comprehensive accuracy and performance testing have not yet been conducted," "and the code is still in intensive iterations" )]]
