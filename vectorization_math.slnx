@@ -1,7 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="vectorization_math/vectorization_math.vcxproj" Id="afbef408-c026-4349-8fb3-a7b5c9039277" />
-</Solution>
