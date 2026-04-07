@@ -22,7 +22,7 @@
 ## 📊 性能与精度概览
 
 以下为部分函数在全域随机单精度浮点数测试中的精度表现（测试平台：AMD EPYC 9654）：
-
+[查看校验说明](./accuracy-validation.md)
 | 函数 | max ULP error | mean ULP error | ratio ULP distance ≤1 | count inexact ulp err |
 | :--- | :--- | :--- | :--- | :--- |
 | `exp` | 1.04 | 0.033 | 99.60% | 827,231,721 |
