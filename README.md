@@ -1,7 +1,7 @@
 # foye_fastmath
-**A lightweight vectorized math library for x86-64, built on top of the AVX2/FMA instruction set.** It is designed for high-performance, high-accuracy single-precision floating-point math workloads.
+**A lightweight vectorized math library for x86-64, built on top of the AVX2/FMA instruction set.** As quickly as possible while ensuring the accuracy that I consider reasonable.
 
-Unlike scalar implementations in standard math libraries (such as glibc), all core functions in this library operate on `__m256` vectors and have been **validated for accuracy over the entire float domain (all 2^32 single-precision values)**. It also provides convenient C++ array-based interfaces under `fy::*` for easier integration.
+All core functions in this library operate on `__m256` vectors and have been **validated for accuracy over the entire float domain (all 2^32 single-precision values)**.
 
 ## ✨ Key Features
 
