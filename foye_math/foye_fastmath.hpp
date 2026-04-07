@@ -425,7 +425,39 @@ namespace fy::simd::intrinsic
 	*/
 
 	__m256 asin(__m256) noexcept;
+	/*
+		range:					   [¬isnan(x)] ∧ [isfinite(x)] ∧ [−1.0 ≤ x ≤ 1.0]
+		count valid test input:	   2147483648
+		count inexact ulp err:     0
+		max ulp distance:		   2
+		mean ulp distance:		   0.0040032
+		median ulp distance:	   0
+		max ulp error:			   2.43149
+		mean ulp error:			   0.0261458
+		median ulp error:		   6.4043e-33
+		ratio ulp 1:			   0.38392 %
+		ratio ulp 2:			   0.00819992 %
+		ratio ulp 3:			   0 %
+		ratio ulp 4:			   0 %
+	*/
+
 	__m256 acos(__m256) noexcept;
+	/*
+		range:					   [¬isnan(x)] ∧ [isfinite(x)] ∧ [−1.0 ≤ x ≤ 1.0]
+		count valid test input:	   2147483648
+		count inexact ulp err:     0
+		max ulp distance:		   1
+		mean ulp distance:		   0.0756897
+		median ulp distance:	   0
+		max ulp error:			   1.17728
+		mean ulp error:			   0.367404
+		median ulp error:		   0.366678
+		ratio ulp 1:			   7.56897 %
+		ratio ulp 2:			   0 %
+		ratio ulp 3:			   0 %
+		ratio ulp 4:			   0 %
+	*/
+
 	__m256 atan(__m256) noexcept;
 	/*
 		range:					   full
@@ -452,14 +484,45 @@ namespace fy::simd::intrinsic
 		max ulp error:			   1.77808
 		mean ulp error:			   0.176395
 		median ulp error:		   0.0460967
-		ratio ulp 1:			   12.6255
-		ratio ulp 2:			   5.58794e-05
-		ratio ulp 3:			   0
-		ratio ulp 4:			   0
+		ratio ulp 1:			   12.6255 %
+		ratio ulp 2:			   5.58794e-05 %
+		ratio ulp 3:			   0 %
+		ratio ulp 4:			   0 %
 	*/
 
 	__m256 acosh(__m256) noexcept;
+	/*
+		range:					   [¬isnan(x)] ∧ [isfinite(x)] ∧ [+1.0 ≤ x ≤ +∞)
+		count valid test input:    1090519038
+		count inexact ulp err:     0
+		max ulp distance:		   2
+		mean ulp distance:		   0.224404
+		median ulp distance:	   0
+		max ulp error:			   2.00019
+		mean ulp error:			   0.314366
+		median ulp error:		   0.274474
+		ratio ulp 1:			   22.4399 %
+		ratio ulp 2:			   0.000242362 %
+		ratio ulp 3:			   0 %
+		ratio ulp 4:			   0 %
+	*/
+
 	__m256 atanh(__m256) noexcept;
+	/*
+		range:					   [¬isnan(x)] ∧ [isfinite(x)] ∧ (-1.0 < x < +1)
+		valid input count:		   2147483646
+		inexact ulp err:		   0
+		max ulp distance:		   2
+		mean ulp distance:		   0.0459518
+		median ulp distance:	   0
+		max ulp error:			   2.0005
+		mean ulp error:			   0.0563131
+		median ulp error:		   1.28086e-32
+		ratio ulp 1:			   4.5868 %
+		ratio ulp 2:			   0.00418983 %
+		ratio ulp 3:			   0 %
+		ratio ulp 4:			   0 %
+	*/
 
 	__m256 cbrt(__m256) noexcept;
 	/*
