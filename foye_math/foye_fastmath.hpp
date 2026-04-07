@@ -556,7 +556,24 @@ namespace fy::simd::intrinsic
 		ratio ulp 4:              0 %
 	*/
 
-	foyemath_conditional __m256 erf(__m256 input) noexcept;
+	__m256 erf(__m256 input) noexcept;
+	/*
+		range:					  full
+		count inexact ulp err:    0
+		max ulp distance:		  1
+		mean ulp distance:		  0.0813149
+		median ulp distance:	  0
+		max ulp error:			  0.987708
+		mean ulp error:			  0.140309
+		median ulp error:		  0.00429752
+		ratio ulp 1:			  8.13149 %
+		ratio ulp 2:			  0 %
+		ratio ulp 3:			  0 %
+		ratio ulp 4:			  0 %
+	*/
+
+	
+
 	foyemath_conditional __m256 erfc(__m256 input) noexcept;
 
 	foyemath_developing __m256 erfcx(__m256 input) noexcept;
