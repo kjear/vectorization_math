@@ -1,4 +1,3 @@
-```markdown
 # foye_fastmath
 **A lightweight vectorized math library for x86-64, built on top of the AVX2/FMA instruction set.** It is designed for high-performance, high-accuracy single-precision floating-point math workloads.
 
@@ -19,7 +18,9 @@ Unlike scalar implementations in standard math libraries (such as glibc), all co
 - **Transparent development status**: Macros such as `foyemath_conditional` and `foyemath_experimental` clearly indicate the maturity and stability level of features.
 
 ## 📊 Accuracy Overview
-[accuracy-validation.md][accuracy-validation.md]
+
+[accuracy-validation.md](accuracy-validation.md)
+
 Below is a snapshot of accuracy results for several functions under exhaustive single-precision testing (test platform: AMD EPYC 9654):
 
 | Function | max ULP error | mean ULP error | ratio ULP distance ≤1 | count inexact ulp err |
@@ -48,6 +49,7 @@ Below is a snapshot of accuracy results for several functions under exhaustive s
 ### Basic Usage
 
 #### 1. Vectorized SIMD interface (`fy::simd::intrinsic`)
+
 Operate directly on `__m256`, suitable for dense SIMD compute loops.
 
 ```cpp
@@ -77,13 +79,14 @@ int main()
 ```
 
 #### 2. Batch array interface (`fy::`)
+
 Process arrays of arbitrary length with automatic vectorized loops and tail handling.
 
 ```cpp
 #include "foye_fastmath.hpp"
 #include <vector>
 
-int main() 
+int main()
 {
     const std::size_t N = 1024;
     std::vector<float> in(N), out_exp(N), out_log(N);
@@ -102,26 +105,32 @@ int main()
 ## 📖 Implemented Functions
 
 ### Elementary functions
+
 - `exp`, `exp2`, `exp10`, `expm1`
 - `log`, `log2`, `log10`, `log1p`
 
 ### Trigonometric functions
+
 - `sin`, `cos`, `tan`
 - `sincos` (compute both simultaneously)
 
 ### Hyperbolic functions
+
 - `sinh`, `cosh`, `tanh`
 - `sinhcosh` (compute both simultaneously)
 
 ### Inverse trigonometric / hyperbolic functions
+
 - `asin`, `acos`, `atan`, `atan2`
 - `asinh`, `acosh`, `atanh`
 - `asinacos`, `asinhacosh` (paired computation)
 
 ### Powers and roots (experimental)
+
 - `cbrt`, `invsqrt` (pattern demonstrated via `invcbrt`), `hypot`, `pow`, `fmod`, `modf`
 
 ### Error functions (experimental)
+
 - `erf`, `erfc`
 
 ## 🛠️ Development Status and Roadmap
