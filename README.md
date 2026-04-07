@@ -19,7 +19,7 @@ Unlike scalar implementations in standard math libraries (such as glibc), all co
 
 ## 📊 Accuracy Overview
 
-[accuracy-validation.md](accuracy-validation.md)
+Please refer to the verification instructions in [accuracy-validation.md](accuracy-validation.md)
 
 Below is a snapshot of accuracy results for several functions under exhaustive single-precision testing (test platform: AMD EPYC 9654):
 
