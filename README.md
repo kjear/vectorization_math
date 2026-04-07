@@ -160,4 +160,3 @@ These macros are currently defined as empty. In future stable releases, they may
 ## 📄 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-```
