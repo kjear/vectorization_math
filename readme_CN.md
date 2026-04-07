@@ -1,12 +1,6 @@
 ```markdown
 # foye_fastmath
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![C++17](https://img.shields.io/badge/C++-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
-[![SIMD](https://img.shields.io/badge/SIMD-AVX2%2FFMA-green.svg)](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions)
-[![Status](https://img.shields.io/badge/status-active--development-yellow.svg)]()
-[![Platform](https://img.shields.io/badge/platform-x86__64-lightgrey.svg)]()
-
 **一个专注于 x86-64 平台、基于 AVX2/FMA 指令集的轻量级向量化数学库。** 为需要高性能、高精度单精度浮点数学计算的场景而设计。
 
 与标准数学库（如 glibc）的标量版本不同，本库所有函数均以 `__m256` 作为核心运算类型，并对每个函数进行了 **全域（2^32 个单精度浮点数）** 精度验证。同时提供了友好的 C++ 数组接口 `fy::*`，方便集成。
