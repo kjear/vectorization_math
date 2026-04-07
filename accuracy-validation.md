@@ -1,7 +1,8 @@
 ```md
 # Accuracy Validation Test Report
 
-This document describes the methodology used to validate the numerical accuracy of the library's single-precision floating-point mathematical functions.
+This document describes the methodology used to validate the numerical accuracy 
+of the library's single-precision floating-point mathematical functions.
 
 ---
 
@@ -17,7 +18,8 @@ Two kinds of reference values are generated:
 
 ### 1.1 Rounded Reference
 
-The target mathematical function is evaluated with **24-bit precision** (i.e. the effective significand width of IEEE-754 single-precision `float`) using **round-to-nearest-even**.
+The target mathematical function is evaluated with **24-bit precision** 
+(i.e. the effective significand width of IEEE-754 single-precision `float`) using **round-to-nearest-even**.
 
 This value is treated as the **correctly rounded binary32 result** of an ideal infinite-precision computation.
 
@@ -34,14 +36,18 @@ To support accurate ULP error measurement, the system also computes the same fun
   (= 24 effective bits + 32 guard bits)
 - Maximum working precision: **262144 bits**
 
-At each step, the implementation checks whether the current result can be **reliably rounded** to the audit precision using MPFR's `can_round` mechanism.
+At each step, the implementation checks whether the current result can 
+be **reliably rounded** to the audit precision using MPFR's `can_round` mechanism.
 
 If not, the working precision is doubled until either:
 
 1. reliable rounding becomes possible, or
 2. the maximum precision limit is reached.
 
-If the maximum precision is reached and the result still cannot be certified for reliable rounding (which typically happens only in extreme cases where the exact result lies extraordinarily close to a midpoint between adjacent floating-point numbers), then the highest-precision result currently available is used as a **best-effort approximation**, and the corresponding ULP error is marked as **inexact**.
+If the maximum precision is reached and the result still cannot be certified for reliable rounding 
+(which typically happens only in extreme cases where the exact result lies extraordinarily close to a midpoint between adjacent floating-point numbers), 
+then the highest-precision result currently available is used as a **best-effort approximation**, 
+and the corresponding ULP error is marked as **inexact**.
 
 For special outputs such as **NaN** and **infinity**, no adaptive refinement is required; these cases are treated as exact directly.
 
@@ -76,7 +82,8 @@ Two complementary metrics are reported:
 
 ### 2.1 ULP Error
 
-ULP (Unit in the Last Place) error measures the distance between the actual implementation result and the ideal mathematical result, expressed in units of local floating-point spacing.
+ULP (Unit in the Last Place) error measures the distance between the actual implementation result 
+and the ideal mathematical result, expressed in units of local floating-point spacing.
 
 The metric is defined as:
 
@@ -109,7 +116,8 @@ That is, the ULP is the spacing from the reference value to the next representab
 
 #### Why the numerator uses the high-precision reference
 
-The numerator uses the **high-precision reference** instead of the 24-bit rounded reference so that the metric reflects the true mathematical error, rather than mixing in the rounding error of the reference itself.
+The numerator uses the **high-precision reference** instead of the 24-bit rounded reference so that the metric reflects the true mathematical error, 
+rather than mixing in the rounding error of the reference itself.
 
 ---
 
@@ -148,7 +156,8 @@ Unlike ULP error, ULP distance is a **discrete integer metric**.
 
 ### 3.1 Computation Method
 
-The IEEE-754 binary representation is first reinterpreted as an unsigned integer, then mapped into a linear monotonic order using a sign-aware transformation:
+The IEEE-754 binary representation is first reinterpreted as an unsigned integer, 
+then mapped into a linear monotonic order using a sign-aware transformation:
 
 ```code
     to_ordered(bits):
@@ -243,7 +252,8 @@ All tested functions in this report are:
 - take **one input argument**
 - return **one result**
 
-For functions whose mathematical domain is **all real numbers**, validation is performed over **all IEEE-754 binary32 inputs**, covering every possible `2^32` bit pattern.
+For functions whose mathematical domain is **all real numbers**, 
+validation is performed over **all IEEE-754 binary32 inputs**, covering every possible `2^32` bit pattern.
 
 This includes:
 
@@ -254,7 +264,8 @@ This includes:
 - all normal finite values
 - mathematically out-of-domain finite inputs (when applicable to a “full bit pattern” sweep)
 
-For functions that also have a single input and single output but whose domain is **not all real numbers**, the tested input range is stated explicitly near the corresponding validation results.
+For functions that also have a single input and single output but whose domain is **not all real numbers**, 
+the tested input range is stated explicitly near the corresponding validation results.
 
 In per-function summaries:
 
