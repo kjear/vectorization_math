@@ -21,7 +21,32 @@ Unlike scalar implementations in standard math libraries (such as glibc), all co
 
 For detailed verification logic and interpretation of various indicators in the verification results, please refer to [accuracy-validation.md](accuracy-validation.md)
 
-Below is a snapshot of accuracy results for several functions under exhaustive single-precision testing (test platform: AMD EPYC 9654):
+Below is a snapshot of accuracy results for several functions under exhaustive single-precision testing.
+
+###  Test Environment
+
+- **CPU:** AMD EPYC 9654 96-Core Processor (Zen 4)
+- **Memory:** 256 GB DDR5-4800
+- **OS:** Ubuntu 22.04.1 LTS
+- **Kernel:** 5.15.0-91-generic
+
+###  Build Toolchain
+
+- **CMake:** 3.22.1
+- **Compiler:** Clang 14.0.0 (`Ubuntu clang version 14.0.0-1ubuntu1.1`)
+- **Target:** `x86_64-pc-linux-gnu`
+
+###  Compiler Flags
+
+- `-O3 -mavx2 -mfma -Wall -Wextra -fopenmp`
+
+###  Reference Libraries
+
+- **MPFR:** 4.1.0 (linked via `pkg-config`)
+- **GMP:** 6.2.1
+
+> **Note**
+> - Performance tests use the `Release` build type.
 
 | Function | Range | max ULP distance | mean ULP distance | median ULP distance | max ULP error | mean ULP error | median ULP error |
 | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
