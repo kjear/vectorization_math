@@ -19,7 +19,7 @@ Unlike scalar implementations in standard math libraries (such as glibc), all co
 - **Transparent development status**: Macros such as `foyemath_conditional` and `foyemath_experimental` clearly indicate the maturity and stability level of features.
 
 ## 📊 Accuracy Overview
-[accuracy-validation.md](accuracy-validation.md)
+[accuracy-validation.md][accuracy-validation.md]
 Below is a snapshot of accuracy results for several functions under exhaustive single-precision testing (test platform: AMD EPYC 9654):
 
 | Function | max ULP error | mean ULP error | ratio ULP distance ≤1 | count inexact ulp err |
