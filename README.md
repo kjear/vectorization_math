@@ -35,7 +35,7 @@ Below is a snapshot of accuracy results for several functions under exhaustive s
 
 ###  Compiler Flags
 
-- `-O3 -mavx2 -mfma -Wall -Wextra -fopenmp`
+- `-O3 -mavx2 -mfma`
 
 ###  Reference Libraries
 
