@@ -155,6 +155,7 @@ int main()
 
 ### Future Plans
 
+- [ ] **quick version**: Relax certain requirements for computational accuracy, ignore some boundary conditions, to switch to higher performance algorithms implementation.
 - [ ] **SSE fallback path**: Provide a fallback or substitute implementation for older CPUs with only SSE4.2 support.
 - [ ] **AVX-512 support**: Optimize and add `__m512`-based implementations for higher throughput.
 - [ ] **ARM NEON/SVE support**: Introduce a unified abstraction layer to support ARM vector instruction sets.
