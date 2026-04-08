@@ -118,9 +118,12 @@ The numerator uses the **high-precision reference** instead of the 24-bit rounde
 | :--- | ---: |
 | Both reference and actual result are NaN | `0` |
 | Only one is NaN | `+∞` |
-| Both reference and actual result are zero | `0` |
+| Both reference and actual result are the same signed zero | `0` |
+| One is zero and the other is non-zero, or the zeros differ in sign | `+∞` |
 | Both are the same signed infinity | `0` |
 | Only one is infinity, or infinities differ in sign | `+∞` |
+
+> Note: In this validation framework, `+0` and `-0` are treated as distinct outputs.
 
 ---
 
