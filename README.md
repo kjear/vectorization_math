@@ -7,7 +7,7 @@ Its core API operates directly on native SIMD vector types such as `__m256` `__m
 
 - **Exhaustive accuracy validation**: Every completed core function has been rigorously tested over the **entire IEEE-754 binary32 input space**, including NaNs, infinities, signed zeros, subnormals, and all edge cases.
 - **High accuracy guarantees**:
-  - For all completed functions, the **maximum ULP error** is typically within 1–4 ULPs, while the **mean ULP error** is far below 0.5 ULP.
+  - For all completed functions, the **maximum ULP error** is typically within 1–4 ULPs (Most are below 2), while the **mean ULP error** is far below 0.5 ULP.
   - Accuracy validation is based on GNU MPFR with adaptive precision (up to 262144 bits), ensuring reliable error measurement.
 - **High-performance implementation**:
   - Core algorithms use carefully optimized Remez polynomial approximations.
