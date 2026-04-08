@@ -12,7 +12,6 @@ Its core API operates directly on native SIMD vector types such as `__m256` `__m
 - **High-performance implementation**:
   - Core algorithms use carefully optimized Remez polynomial approximations.
   - Friendly dispatch logic selects the best algorithmic path for different input ranges.
-- **Easy-to-use batch interfaces**: In addition to the low-level `__m256` interface, the library provides C++-style pointer/length interfaces such as `fy::exp(len, in, out)`, which automatically handle tail elements and unaligned memory.
 - **Transparent development status**: Macros such as `foyemath_conditional` and `foyemath_experimental` clearly indicate the maturity and stability level of features.
 
 ## 📊 Accuracy Overview
@@ -86,9 +85,9 @@ Below is a snapshot of accuracy results for several functions under exhaustive s
 - **Compiler**: A compiler with support for C++20 (`std::bit_cast` is used) and AVX2/FMA.
 - **CPU**: An x86-64 processor with AVX2 and FMA support (e.g. Intel Haswell and newer, AMD Excavator and newer).
 
-### Basic Usage
+### Usage
 
-#### 1. Vectorized SIMD interface (`fy::simd::intrinsic`)
+#### Vectorized SIMD interface (`fy::simd::intrinsic`)
 
 Operate directly on `__m256`, suitable for dense SIMD compute loops.
 
@@ -113,30 +112,6 @@ int main()
     float res_sin[8], res_cos[8];
     _mm256_storeu_ps(res_sin, s);
     _mm256_storeu_ps(res_cos, c);
-
-    return 0;
-}
-```
-
-#### 2. Batch array interface (`fy::`)
-
-Process arrays of arbitrary length with automatic vectorized loops and tail handling.
-
-```cpp
-#include "foye_fastmath.hpp"
-#include <vector>
-
-int main()
-{
-    const std::size_t N = 1024;
-    std::vector<float> in(N), out_exp(N), out_log(N);
-
-    for (size_t i = 0; i < N; ++i) in[i] = i * 0.01f;
-
-    fy::exp(N, in.data(), out_exp.data());
-    fy::log(N, in.data(), out_log.data());
-
-    // ... use results
 
     return 0;
 }
