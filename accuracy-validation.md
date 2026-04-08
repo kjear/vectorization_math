@@ -89,8 +89,8 @@ where:
 - `high_precision_reference` is the adaptive-precision MPFR result
 - `rounded_reference` is the correctly rounded binary32 reference
 
-#### Definition of `ulp(rounded_reference)`
-
+#### Definition of `ulp(rounded_reference) `
+In the current implementation, zero comparisons are handled explicitly before the generic ULP-error formula is applied. Therefore, zero/non-zero mismatches do not use the finite-value formula above and are reported as `+∞`.
 - If the reference is **zero**:
 
 ```text
@@ -166,7 +166,8 @@ For all non-NaN floating-point values, this mapping produces an integer ordering
 
 NaNs are excluded from this ordering and handled separately.
 
-Signed zeros and infinities are also handled by explicit rules.
+The monotonic ordering is applied only to non-NaN, finite, non-zero values.
+NaNs, infinities, and signed zeros are handled by explicit rules before the bit-order mapping is used.
 
 ---
 
@@ -175,12 +176,14 @@ Signed zeros and infinities are also handled by explicit rules.
 | Condition | ULP Distance |
 | :--- | ---: |
 | Both are NaN | `0` |
-| Only one is NaN | `bit_cast<float>(UINT32_MAX)` |
-| Both are zero (including `+0` and `-0`) | `0` |
+| Only one is NaN | `UINT32_MAX` |
+| Both are the same signed zero | `0` |
+| One is zero and the other is non-zero, or the zeros differ in sign | `UINT32_MAX` |
 | Both are the same signed infinity | `0` |
-| Only one is infinity, or infinities differ in sign | `bit_cast<float>(UINT32_MAX)` |
+| Only one is infinity, or infinities differ in sign | `UINT32_MAX` |
 
-> Note: NaNs are not part of the monotonic ordering, so they are treated explicitly outside the bit-order mapping.
+> NaNs, infinities, and signed zeros are handled explicitly outside the bit-order mapping.
+> In particular, `+0` and `-0` are treated as distinct outputs.
 
 ---
 
