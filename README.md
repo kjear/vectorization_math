@@ -1,7 +1,7 @@
 # foye_fastmath
-**A lightweight vectorized math library for x86-64, built on top of the AVX2/FMA instruction set.** As quickly as possible while ensuring the accuracy that I consider reasonable.
+**A lightweight vectorized libm-style library for x86-64, built on top of AVX2/FMA and AVX-512 intrinsics.** The implementation prioritizes throughput while maintaining a level of accuracy suitable for practical numerical use.
 
-All core functions in this library operate on `__m256` vectors and have been **validated for accuracy over the entire float domain (all 2^32 single-precision values)**.
+Its core API operates directly on native SIMD vector types such as `__m256` `__m512` vectors and have been **validated for accuracy over the entire IEEE754 binary32 domain (all 2^32 single-precision values)**.
 
 ## ✨ Key Features
 
