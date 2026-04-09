@@ -1,6 +1,7 @@
 #include <foye_fastmath.hpp>
 
-alignas(64) constexpr float exp2_tab16[16] = {
+
+static alignas(64) constexpr float exp2_tab16[16] = {
 	1.0000000000000000000f, 1.0442737824274138403f,
 	1.0905077326652576592f, 1.1387886347566916537f,
 	1.1892071150027210667f, 1.2418578120734840486f,
@@ -91,61 +92,43 @@ static inline __m256 exp10_scale_result_fast(__m256 core, __m256i k) noexcept
 	return _mm256_mul_ps(core, twopk);
 }
 
-static inline __m256 exp10_scale_result_slow(__m256 core, __m256i k) noexcept
-{
-	const __m256 one = _mm256_set1_ps(1.0f);
-	const __m256 two = _mm256_set1_ps(2.0f);
-
-	const __m256 subnorm_scale = _mm256_set1_ps(0x1p-24f);
-	const __m256 scale_2pow127 = _mm256_castsi256_ps(_mm256_set1_epi32(0x7F000000));
-
-	__m256i hi_mask_i = _mm256_cmpgt_epi32(k, _mm256_set1_epi32(127));
-	__m256 hi_mask = _mm256_castsi256_ps(hi_mask_i);
-
-	__m256i hi_one = _mm256_srli_epi32(hi_mask_i, 31);
-	__m256i k_adj_hi = _mm256_sub_epi32(k, hi_one);
-	__m256 extra_hi = _mm256_blendv_ps(one, two, hi_mask);
-
-	__m256i sub_mask_i = _mm256_cmpgt_epi32(_mm256_set1_epi32(-126), k_adj_hi);
-	__m256 sub_mask = _mm256_castsi256_ps(sub_mask_i);
-
-	__m256i k_adj_sub = _mm256_add_epi32(
-		k_adj_hi,
-		_mm256_blendv_epi8(_mm256_setzero_si256(), _mm256_set1_epi32(24), sub_mask_i)
-	);
-
-	__m256i expbits = _mm256_slli_epi32(
-		_mm256_add_epi32(k_adj_sub, _mm256_set1_epi32(127)),
-		23
-	);
-
-	__m256 twopk = _mm256_castsi256_ps(expbits);
-	twopk = _mm256_blendv_ps(twopk, _mm256_mul_ps(twopk, subnorm_scale), sub_mask);
-
-	__m256 result = _mm256_mul_ps(core, extra_hi);
-	result = _mm256_mul_ps(result, twopk);
-
-	__m256i k_eq_128_i = _mm256_cmpeq_epi32(k, _mm256_set1_epi32(128));
-	__m256 result_k128 = _mm256_mul_ps(scale_2pow127, _mm256_mul_ps(two, core));
-
-	return _mm256_blendv_ps(result, result_k128, _mm256_castsi256_ps(k_eq_128_i));
-}
-
 static inline __m256 exp10_scale_result(__m256 core, __m256i k) noexcept
 {
-	__m256i lt_min_i = _mm256_cmpgt_epi32(_mm256_set1_epi32(-126), k);
-	__m256i gt_max_i = _mm256_cmpgt_epi32(k, _mm256_set1_epi32(127));
+	const __m256 zero = _mm256_setzero_ps();
+	const __m256 two = _mm256_set1_ps(2.0f);
 
-	const int out_of_range_mask = _mm256_movemask_ps(
-		_mm256_castsi256_ps(_mm256_or_si256(lt_min_i, gt_max_i))
+	const __m256 scale_2pow127 = _mm256_castsi256_ps(_mm256_set1_epi32(0x7F000000));
+
+	const __m256i ge_neg126_i = _mm256_cmpgt_epi32(k, _mm256_set1_epi32(-127));
+	const __m256i le_127_i = _mm256_cmpgt_epi32(_mm256_set1_epi32(128), k);
+	const __m256i normal_mask_i = _mm256_and_si256(ge_neg126_i, le_127_i);
+
+	const __m256i ge_neg149_i = _mm256_cmpgt_epi32(k, _mm256_set1_epi32(-150));
+	const __m256i le_neg127_i = _mm256_cmpgt_epi32(_mm256_set1_epi32(-126), k);
+	const __m256i sub_mask_i = _mm256_and_si256(ge_neg149_i, le_neg127_i);
+
+	const __m256i k_eq_128_i = _mm256_cmpeq_epi32(k, _mm256_set1_epi32(128));
+
+	__m256i normal_expbits = _mm256_slli_epi32(
+		_mm256_add_epi32(k, _mm256_set1_epi32(127)),
+		23
 	);
+	__m256 normal_twopk = _mm256_castsi256_ps(normal_expbits);
+	__m256 normal_result = _mm256_mul_ps(core, normal_twopk);
 
-	if (out_of_range_mask == 0)
-	{
-		return exp10_scale_result_fast(core, k);
-	}
+	__m256i sub_shift = _mm256_add_epi32(k, _mm256_set1_epi32(149));
+	__m256i sub_bits = _mm256_sllv_epi32(_mm256_set1_epi32(1), sub_shift);
+	__m256 sub_twopk = _mm256_castsi256_ps(sub_bits);
+	__m256 sub_result = _mm256_mul_ps(core, sub_twopk);
 
-	return exp10_scale_result_slow(core, k);
+	__m256 result_k128 = _mm256_mul_ps(scale_2pow127, _mm256_mul_ps(two, core));
+
+	__m256 result = zero;
+	result = _mm256_blendv_ps(result, normal_result, _mm256_castsi256_ps(normal_mask_i));
+	result = _mm256_blendv_ps(result, sub_result, _mm256_castsi256_ps(sub_mask_i));
+	result = _mm256_blendv_ps(result, result_k128, _mm256_castsi256_ps(k_eq_128_i));
+
+	return result;
 }
 
 static inline __m256 exp10_finalize_with_masks(
@@ -161,8 +144,6 @@ static inline __m256 exp10_finalize_with_masks(
 {
 	const __m256 zero = _mm256_setzero_ps();
 	const __m256 one = _mm256_set1_ps(1.0f);
-	const __m256 two = _mm256_set1_ps(2.0f);
-	(void)two;
 	(void)absx;
 
 	const __m256 inf = _mm256_set1_ps(std::numeric_limits<float>::infinity());
@@ -192,7 +173,7 @@ __m256 fy::simd::intrinsic::exp10(__m256 input) noexcept
 
 	const __m256 tiny_x = _mm256_set1_ps(0x1p-25f);
 	const __m256 over_th = _mm256_set1_ps(38.5318394f);
-	const __m256 under_th = _mm256_set1_ps(-44.8534698f);
+	const __m256 under_th = _mm256_set1_ps(-45.15449934959718f);
 	const __m256 ln10 = _mm256_set1_ps(2.30258509299404568402f);
 	const __m256 one = _mm256_set1_ps(1.0f);
 
