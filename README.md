@@ -25,7 +25,7 @@ There are **no internal cross-dependencies** between different mathematical kern
 ## 📊 Accuracy Overview
 
 For detailed verification logic and interpretation of various indicators in the verification results, please refer to [accuracy-validation.md](accuracy-validation.md)
-For detailed error reports, please refer to [accuracy-validation.md](errors.md)
+For detailed error reports, please refer to [errors.md](errors.md)
 
 ###  Test Environment
 
