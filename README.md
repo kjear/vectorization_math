@@ -3,6 +3,14 @@
 
 Its core API operates directly on native SIMD vector types such as `__m256` `__m512` vectors and have been **validated for accuracy over the entire IEEE754 binary32 domain (all 2^32 single-precision values)**.
 
+### 🔌 Zero Dependencies & Self-Contained Functions
+
+Every function in this library is implemented as a **standalone, self-contained unit**. 
+There are **no internal cross-dependencies** between different mathematical kernels. 
+
+**Trade-off Notice:** This design deliberately leads to duplication of constant tables and boilerplate code across compilation units. 
+**Benefit:** You are free to cherry-pick and copy *only the specific `.c` and `.h` files you need* into your project without pulling in the rest of the library. No linker gymnastics, no hidden internal calls—just drop the file and compile.
+
 ## ✨ Key Features
 
 - **Exhaustive accuracy validation**: Every completed core function has been rigorously tested over the **entire IEEE-754 binary32 input space**, including NaNs, infinities, signed zeros, subnormals, and all edge cases.
