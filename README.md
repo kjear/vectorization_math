@@ -9,7 +9,7 @@ Every function in this library is implemented as a **standalone, self-contained 
 There are **no internal cross-dependencies** between different mathematical kernels. 
 
 **Trade-off Notice:** This design deliberately leads to duplication of constant tables and boilerplate code across compilation units. 
-**Benefit:** You are free to cherry-pick and copy *only the specific `.c` and `.h` files you need* into your project without pulling in the rest of the library. No linker gymnastics, no hidden internal calls—just drop the file and compile.
+**Benefit:** You are free to cherry-pick and copy *only the specific `.cpp` files you need* into your project without pulling in the rest of the library. No linker gymnastics, no hidden internal calls—just drop the file and compile.
 
 ## ✨ Key Features
 
