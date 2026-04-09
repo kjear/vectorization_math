@@ -202,6 +202,214 @@
 
 
 <details>
+<summary><strong>Inverse Trigonometric Functions</strong></summary>
+
+> **Notes**
+> - **MaULPD**: maximum ULP distance
+> - **MeULPD**: mean ULP distance
+> - **MaULPE**: maximum ULP error
+> - **MeULPE**: mean ULP error
+> - **CIUER**: count of inexact ULP error cases
+
+### Summary
+
+| Function | MaULPD | MeULPD   | MaULPE | MeULPE  | CIUER | Range             |
+|:--------|-------:|---------:|-------:|--------:|------:|:------------------|
+| `asin`  | 2      | 0.004035 | 2.43149 | 0.026352 | 2     | `[¬isnan(x)] ∧ [isfinite(x)] ∧ [−1.0 ≤ x ≤ 1.0]` |
+| `acos`  | 1      | 0.076286 | 1.17728 | 0.370297 | 1     | `[¬isnan(x)] ∧ [isfinite(x)] ∧ [−1.0 ≤ x ≤ 1.0]` |
+| `atan`  | 2      | 0.002199 | 1.86172 | 0.186043 | 2     | `binary32 domain` |
+
+<details>
+<summary><strong><code>asin</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Validated count | 2130706434 |
+| Inexact ULP error count | 2 |
+| Max ULP distance | 2 |
+| Max ULP error | 2.43149 |
+| Mean ULP distance | 0.004034721002771422 |
+| Mean ULP error | 0.026351641324173352 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 0.386943% |
+| 2 | 0.008264% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>acos</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Validated count | 2130706434 |
+| Inexact ULP error count | 1 |
+| Max ULP distance | 1 |
+| Max ULP error | 1.17728 |
+| Mean ULP distance | 0.076285653624679485 |
+| Mean ULP error | 0.370296622631125989 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 7.628565% |
+| 2 | 0% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>atan</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Inexact ULP error count | 2 |
+| Max ULP distance | 2 |
+| Max ULP error | 1.86172 |
+| Mean ULP distance | 0.002199139911681414 |
+| Mean ULP error | 0.186043230828518402 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 0.216039% |
+| 2 | 0.001938% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+</details>
+
+
+<details>
+<summary><strong>Inverse Hyperbolic Functions</strong></summary>
+
+> **Notes**
+> - **MaULPD**: maximum ULP distance
+> - **MeULPD**: mean ULP distance
+> - **MaULPE**: maximum ULP error
+> - **MeULPE**: mean ULP error
+> - **CIUER**: count of inexact ULP error cases
+
+### Summary
+
+| Function | MaULPD | MeULPD   | MaULPE | MeULPE  | CIUER | Range             |
+|:--------|-------:|---------:|-------:|--------:|------:|:------------------|
+| `asinh` | 2      | 0.126256 | 1.77808 | 0.176395 | 2     | `binary32 domain` |
+| `acosh` | 2      | 0.227911 | 2.00019 | 0.319278 | 1     | `[¬isnan(x)] ∧ [isfinite(x)] ∧ [+1.0 ≤ x ≤ +∞)` |
+| `atanh` | 2      | 0.049515 | 2.00050 | 0.058620 | 2     | `[¬isnan(x)] ∧ [isfinite(x)] ∧ (-1.0 < x < +1)` |
+
+<details>
+<summary><strong><code>asinh</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Inexact ULP error count | 2 |
+| Max ULP distance | 2 |
+| Max ULP error | 1.77808 |
+| Mean ULP distance | 0.126256359741091728 |
+| Mean ULP error | 0.176394628548644038 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 12.625524% |
+| 2 | 5.587935e-05% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>acosh</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Validated count | 1073741825 |
+| Inexact ULP error count | 1 |
+| Max ULP distance | 2 |
+| Max ULP error | 2.00019 |
+| Mean ULP distance | 0.227910611566239398 |
+| Mean ULP error | 0.319278224865213620 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 22.790569% |
+| 2 | 0.000246% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>atanh</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Validated count | 2130706432 |
+| Inexact ULP error count | 2 |
+| Max ULP distance | 2 |
+| Max ULP error | 2.0005 |
+| Mean ULP distance | 0.049514839968343419 |
+| Mean ULP error | 0.058620303825131484 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 4.941083% |
+| 2 | 0.005200% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+</details>
+
+
+<details>
 <summary><strong>Logarithmic Functions</strong></summary>
 
 > **Notes**
@@ -333,3 +541,150 @@
 > - `log1p` has the smallest maximum ULP distance in this group and maintains the lowest overall mean ULP error among the logarithmic functions listed here.
 
 </details>
+
+
+
+
+<details>
+<summary><strong>Exponential Functions</strong></summary>
+
+> **Notes**
+> - **MaULPD**: maximum ULP distance
+> - **MeULPD**: mean ULP distance
+> - **MaULPE**: maximum ULP error
+> - **MeULPE**: mean ULP error
+> - **CIUER**: count of inexact ULP error cases
+
+### Summary
+
+| Function | MaULPD | MeULPD   | MaULPE | MeULPE  | CIUER | Range             |
+|:--------|-------:|---------:|-------:|--------:|------:|:------------------|
+| `expm1` | 1      | 0.003252 | 1.08049 | 0.031688 | 2         | `binary32 domain` |
+| `exp`   | 1      | 0.004020 | 1.03921 | 0.033113 | 827231721 | `binary32 domain` |
+| `exp2`  | 1      | 0.012631 | 1.45211 | 0.037988 | 822083584 | `binary32 domain` |
+| `exp10` | 2      | 0.015974 | 1.6365  | 0.040064 | 0         | `binary32 domain` |
+
+<details>
+<summary><strong><code>expm1</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Inexact ULP error count | 2 |
+| Max ULP distance | 1 |
+| Max ULP error | 1.08049 |
+| Mean ULP distance | 0.003251794725656509 |
+| Mean ULP error | 0.031688432847495015 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 0.325179% |
+| 2 | 0% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>exp</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Inexact ULP error count | 827231721 |
+| Max ULP distance | 1 |
+| Max ULP error | 1.03921 |
+| Mean ULP distance | 0.004019942134618759 |
+| Mean ULP error | 0.033112797871632638 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 0.401994% |
+| 2 | 0% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>exp2</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Inexact ULP error count | 822083584 |
+| Max ULP distance | 1 |
+| Max ULP error | 1.45211 |
+| Mean ULP distance | 0.012631414458155632 |
+| Mean ULP error | 0.037987722127972355 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 1.263141% |
+| 2 | 0% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>exp10</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Inexact ULP error count | 0 |
+| Max ULP distance | 2 |
+| Max ULP error | 1.6365 |
+| Mean ULP distance | 0.015973763074725866 |
+| Mean ULP error | 0.040064181107827043 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 1.595612% |
+| 2 | 0.000882% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
