@@ -25,8 +25,7 @@ There are **no internal cross-dependencies** between different mathematical kern
 ## 📊 Accuracy Overview
 
 For detailed verification logic and interpretation of various indicators in the verification results, please refer to [accuracy-validation.md](accuracy-validation.md)
-
-Below is a snapshot of accuracy results for several functions under exhaustive single-precision testing.
+For detailed error reports, please refer to [accuracy-validation.md](errors.md)
 
 ###  Test Environment
 
@@ -52,32 +51,6 @@ Below is a snapshot of accuracy results for several functions under exhaustive s
 
 > **Note**
 > - Performance tests use the `Release` build type.
-
-| Function | Range | max ULP distance | mean ULP distance | median ULP distance | max ULP error | mean ULP error | median ULP error |
-| :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `expm1` | `binary32 domain` | 1 | 0.0032518 | 0 | 1.08049 | 0.0316884 | 1.52753e-30 |
-| `exp` | `binary32 domain` | 1 | 0.00401994 | 0 | 1.03921 | 0.0331128 | 2.37515e-30 |
-| `exp2` | `binary32 domain` | 1 | 0.0126462 | 0 | 1.45211 | 0.037994 | 2.37511e-30 |
-| `exp10` | `binary32 domain` | 2 | 0.0159738 | 0 | 1.6365 | 0.0400642 | 2.37515e-30 |
-| `log1p` | `binary32 domain` | 1 | 0.00264305 | 0 | 1.0 | 0.0886416 | 3.511e-13 |
-| `log` | `binary32 domain` | 1 | 0.00315526 | 0 | 0.995498 | 0.12467 | 0 |
-| `log2` | `binary32 domain` | 2 | 0.00222797 | 0 | 1.80444 | 0.124871 | 0 |
-| `log10` | `binary32 domain` | 2 | 0.125065 | 0 | 2.42497 | 0.166659 | 0 |
-| `sin` | `binary32 domain` | 3 | 0.0235913 | 0 | 2.74637 | 0.145632 | 0.0462421 |
-| `cos` | `binary32 domain` | 3 | 0.0287955 | 0 | 2.74637 | 0.147518 | 0.0478886 |
-| `tan` | `binary32 domain` | 4 | 0.129955 | 0 | 4.03596 | 0.192904 | 0.0536609 |
-| `sinh` | `binary32 domain` | 3 | 0.0101207 | 0 | 3.39017 | 0.0233672 | 1.34893e-67 |
-| `cosh` | `binary32 domain` | 3 | 0.00894142 | 0 | 3.28334 | 0.0239164 | 2.89637e-67 |
-| `tanh` | `binary32 domain` | 2 | 0.00141781 | 0 | 1.65245 | 0.0160543 | 2.33419e-67 |
-| `asin` | `[¬isnan(x)] ∧ [isfinite(x)] ∧ [−1.0 ≤ x ≤ 1.0]` | 2 | 0.0040032 | 0 | 2.43149 | 0.0261458 | 6.4043e-33 |
-| `acos` | `[¬isnan(x)] ∧ [isfinite(x)] ∧ [−1.0 ≤ x ≤ 1.0]` | 1 | 0.0756897 | 0 | 1.17728 | 0.367404 | 0.366678 |
-| `atan` | `binary32 domain` | 2 | 0.00219914 | 0 | 1.86172 | 0.186043 | 0.169574 |
-| `asinh` | `binary32 domain` | 2 | 0.126256 | 0 | 1.77808 | 0.176395 | 0.0460967 |
-| `acosh` | `[¬isnan(x)] ∧ [isfinite(x)] ∧ [+1.0 ≤ x ≤ +∞)` | 2 | 0.224404 | 0 | 2.00019 | 0.314366 | 0.274474 |
-| `atanh` | `[¬isnan(x)] ∧ [isfinite(x)] ∧ (−1.0 < x < +1)` | 2 | 0.0459518 | 0 | 2.0005 | 0.0563131 | 1.28086e-32 |
-| `cbrt` | `binary32 domain` | 1 | 0.0850614 | 0 | 0.733448 | 0.259106 | 0.24903 |
-| `invcbrt` | `binary32 domain` | 2 | 0.356053 | 0 | 2.1701 | 0.424954 | 0.362513 |
-| `erf` | `binary32 domain` | 1 | 0.0813149 | 0 | 0.987708 | 0.140309 | 0.00429752 |
 
 > **Notes**
 > - **ULP error**: Continuous real-valued error, capable of distinguishing finer differences such as "0.6 ULP".
