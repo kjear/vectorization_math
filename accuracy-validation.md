@@ -90,7 +90,7 @@ where:
 - `rounded_reference` is the correctly rounded binary32 reference
 
 #### Definition of `ulp(rounded_reference) `
-In the current implementation, zero comparisons are handled explicitly before the generic ULP-error formula is applied. Therefore, zero/non-zero mismatches do not use the finite-value formula above and are reported as `+∞`.
+In the current implementation, comparisons involving NaNs, zeros, and infinities are handled explicitly before the generic finite-value ULP-error formula is applied. Therefore, zero/non-zero mismatches do not use the finite-value formula above and are reported as `+∞`.
 - If the reference is **zero**:
 
 ```text
@@ -124,7 +124,9 @@ The numerator uses the **high-precision reference** instead of the 24-bit rounde
 | Only one is infinity, or infinities differ in sign | `+∞` |
 
 > Note: In this validation framework, `+0` and `-0` are treated as distinct outputs.
+These cases are handled before the generic finite-value ULP-error formula is applied.
 
+> Note: In particular, comparisons involving NaNs, signed zeros, or infinities are classified directly by explicit rules rather than by the finite-value ULP formula.
 ---
 
 ### 2.3 Exactness of ULP Error
@@ -135,6 +137,7 @@ Each ULP error value is accompanied by an **exactness flag**.
 - Otherwise, it is reported as a **best-effort approximation**.
 
 In practice, the ULP error is exact for most test points, although the exact fraction depends on the function.
+
 
 ---
 
@@ -213,9 +216,13 @@ These two metrics complement each other.
 
 ## 5. Meaning of `inexact ulp err`
 
-The indicator **`inexact ulp err`** counts input points for which the reported ULP error was **not certified** by the 56-bit `can_round` audit.
+For comparisons that reach the generic finite-value ULP-error path, the indicator **`inexact ulp err`** counts input points for which the reported ULP error was not certified by the 56-bit `can_round` audit.
+
+Special-case classifications involving NaNs, signed zeros, and infinities are handled separately by explicit rules.
 
 Even in such cases, the reference value is still computed using an MPFR approximation with up to **262144 bits** of precision. Therefore, the additional uncertainty introduced by the lack of certification is extremely small.
+
+For threshold-based summaries (e.g. checks against a 2-ULP bound), uncertified points may be handled by a separate best-effort acceptance rule in borderline cases.
 
 Its worst-case contribution is bounded by:
 
