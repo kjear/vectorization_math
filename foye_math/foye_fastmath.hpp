@@ -56,13 +56,16 @@ namespace fy::simd::intrinsic
 	__m256 acosh(__m256) noexcept;
 	__m256 atanh(__m256) noexcept;
 
+	void sincos(__m256 input, __m256* sin_result, __m256* cos_result) noexcept;
+	void sinhcosh(__m256 input, __m256* sinh_result, __m256* cosh_result) noexcept;
+	void asinacos(__m256 input, __m256* asin_result, __m256* acos_result) noexcept;
+	void asinhacosh(__m256 input, __m256* asinh_res, __m256* acosh_res) noexcept;
 
+	__m256 cbrt(__m256) noexcept;
+	__m256 invcbrt(__m256) noexcept;
 
-	foyemath_conditional __m256 cbrt(__m256) noexcept;
-	foyemath_conditional __m256 invcbrt(__m256) noexcept;
-
-	foyemath_conditional __m256 erf(__m256 input) noexcept;
-	foyemath_conditional __m256 erfc(__m256 input) noexcept;
+	__m256 erf(__m256 input) noexcept;
+	__m256 erfc(__m256 input) noexcept;
 
 	foyemath_developing __m256 erfcx(__m256 input) noexcept;
 	foyemath_developing __m256 erfinv(__m256 input) noexcept;
@@ -75,11 +78,6 @@ namespace fy::simd::intrinsic
 	foyemath_experimental __m256 fmod(__m256 x, __m256 y) noexcept;
 	foyemath_experimental __m256 modf(__m256 x, __m256* intpart) noexcept;
 	foyemath_experimental __m256 atan2(__m256 y, __m256 x) noexcept;
-
-	void sincos(__m256 input, __m256* sin_result, __m256* cos_result) noexcept;
-	void sinhcosh(__m256 input, __m256* sinh_result, __m256* cosh_result) noexcept;
-	void asinacos(__m256 input, __m256* asin_result, __m256* acos_result) noexcept;
-	void asinhacosh(__m256 input, __m256* asinh_res, __m256* acosh_res) noexcept;
 }
 
 namespace fy
