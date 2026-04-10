@@ -751,7 +751,78 @@
 
 
 
+<details>
+<summary><strong>Error Functions</strong></summary>
 
+> **Notes**
+> - **MaULPD**: maximum ULP distance
+> - **MeULPD**: mean ULP distance
+> - **MaULPE**: maximum ULP error
+> - **MeULPE**: mean ULP error
+> - **CIUER**: count of inexact ULP error cases
+
+### Summary
+
+| Function | MaULPD | MeULPD   | MaULPE   | MeULPE  | CIUER | Range             |
+|:--------|-------:|---------:|---------:|--------:|------:|:------------------|
+| `erf`   | 1      | 0.081315 | 0.987708 | 0.140309 | 0     | `binary32 domain` |
+| `erfc`  | 3      | 0.005944 | 3.42222  | 0.031242 | 0     | `binary32 domain` |
+
+<details>
+<summary><strong><code>erf</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Inexact ULP error count | 0 |
+| Max ULP distance | 1 |
+| Max ULP error | 0.987708 |
+| Mean ULP distance | 0.081314893439412117 |
+| Mean ULP error | 0.140309296938752098 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 8.131489% |
+| 2 | 0% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>erfc</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Inexact ULP error count | 0 |
+| Max ULP distance | 3 |
+| Max ULP error | 3.42222 |
+| Mean ULP distance | 0.005943986820057034 |
+| Mean ULP error | 0.031242318777711400 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 0.571533% |
+| 2 | 0.011155% |
+| 3 | 0.000185% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+</details>
 
 
 
