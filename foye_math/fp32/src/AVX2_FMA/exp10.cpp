@@ -1,7 +1,6 @@
 #include <foye_fastmath.hpp>
 
-
-static alignas(64) constexpr float exp2_tab16[16] = {
+alignas(64) static constexpr float exp2_tab16[16] = {
 	1.0000000000000000000f, 1.0442737824274138403f,
 	1.0905077326652576592f, 1.1387886347566916537f,
 	1.1892071150027210667f, 1.2418578120734840486f,
@@ -177,9 +176,6 @@ __m256 fy::simd::intrinsic::exp10(__m256 input) noexcept
 	const __m256 ln10 = _mm256_set1_ps(2.30258509299404568402f);
 	const __m256 one = _mm256_set1_ps(1.0f);
 
-	const __m256 fast_norm_lo = _mm256_set1_ps(-37.9391884f);
-	const __m256 fast_norm_hi = _mm256_set1_ps(38.5224342f);
-
 	__m256 absx = _mm256_and_ps(input, abs_mask);
 
 	__m256 nan_mask = _mm256_cmp_ps(input, input, _CMP_UNORD_Q);
@@ -188,21 +184,6 @@ __m256 fy::simd::intrinsic::exp10(__m256 input) noexcept
 	__m256 over_mask = _mm256_cmp_ps(input, over_th, _CMP_GT_OQ);
 	__m256 under_mask = _mm256_cmp_ps(input, under_th, _CMP_LT_OQ);
 	__m256 tiny_mask = _mm256_cmp_ps(absx, tiny_x, _CMP_LT_OQ);
-
-	{
-		__m256 ge_lo = _mm256_cmp_ps(input, fast_norm_lo, _CMP_GE_OQ);
-		__m256 le_hi = _mm256_cmp_ps(input, fast_norm_hi, _CMP_LE_OQ);
-		__m256 in_fast_norm = _mm256_and_ps(ge_lo, le_hi);
-
-		if (_mm256_movemask_ps(in_fast_norm) == 0xFF)
-		{
-			__m256i k;
-			__m256 core = exp10_core_eval(input, &k);
-			__m256 result = exp10_scale_result_fast(core, k);
-
-			return _mm256_blendv_ps(result, _mm256_fmadd_ps(input, ln10, one), tiny_mask);
-		}
-	}
 
 	__m256 special_mask = _mm256_or_ps(
 		nan_mask,
@@ -219,6 +200,19 @@ __m256 fy::simd::intrinsic::exp10(__m256 input) noexcept
 
 	__m256i k;
 	__m256 core = exp10_core_eval(safe_input, &k);
+
+	// Decide fast vs full scale based on actual k, not input range
+	const __m256i ge_neg126_i = _mm256_cmpgt_epi32(k, _mm256_set1_epi32(-127));
+	const __m256i le_127_i = _mm256_cmpgt_epi32(_mm256_set1_epi32(128), k);
+	const __m256i fast_k_mask_i = _mm256_and_si256(ge_neg126_i, le_127_i);
+
+	if (_mm256_movemask_ps(_mm256_castsi256_ps(fast_k_mask_i)) == 0xFF &&
+		_mm256_movemask_ps(special_mask) == 0)
+	{
+		__m256 result = exp10_scale_result_fast(core, k);
+		return _mm256_blendv_ps(result, _mm256_fmadd_ps(input, ln10, one), tiny_mask);
+	}
+
 	__m256 result = exp10_scale_result(core, k);
 
 	return exp10_finalize_with_masks(
