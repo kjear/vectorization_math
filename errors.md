@@ -696,7 +696,7 @@
 
 | Metric | Value |
 |:--|--:|
-| Range | `full` |
+| Range | `binary32 domain` |
 | Inexact ULP error count | 0 |
 | Max ULP distance | 1 |
 | Max ULP error | 0.733448 |
@@ -724,7 +724,7 @@
 
 | Metric | Value |
 |:--|--:|
-| Range | `full` |
+| Range | `binary32 domain` |
 | Inexact ULP error count | 0 |
 | Max ULP distance | 2 |
 | Max ULP error | 2.1701 |
