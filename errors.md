@@ -674,7 +674,80 @@
 
 </details>
 
+<details>
+<summary><strong>Cube Root Functions</strong></summary>
 
+> **Notes**
+> - **MaULPD**: maximum ULP distance
+> - **MeULPD**: mean ULP distance
+> - **MaULPE**: maximum ULP error
+> - **MeULPE**: mean ULP error
+> - **CIUER**: count of inexact ULP error cases
+
+### Summary
+
+| Function  | MaULPD | MeULPD   | MaULPE  | MeULPE  | CIUER | Range  |
+|:----------|-------:|---------:|--------:|--------:|------:|:-------|
+| `cbrt`    | 1      | 0.085061 | 0.733448 | 0.259106 | 0     | `binary32 domain` |
+| `invcbrt` | 2      | 0.356053 | 2.17010  | 0.424954 | 0     | `binary32 domain` |
+
+<details>
+<summary><strong><code>cbrt</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Range | `full` |
+| Inexact ULP error count | 0 |
+| Max ULP distance | 1 |
+| Max ULP error | 0.733448 |
+| Mean ULP distance | 0.085061443503946066 |
+| Mean ULP error | 0.259105798791933292 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 8.506144% |
+| 2 | 0% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+<details>
+<summary><strong><code>invcbrt</code></strong></summary>
+
+| Metric | Value |
+|:--|--:|
+| Range | `full` |
+| Inexact ULP error count | 0 |
+| Max ULP distance | 2 |
+| Max ULP error | 2.1701 |
+| Mean ULP distance | 0.356053392868489027 |
+| Mean ULP error | 0.424953987176614776 |
+
+#### Distribution
+
+| ULP distance | Ratio |
+|:--|--:|
+| 1 | 34.858019% |
+| 2 | 0.373660% |
+| 3 | 0% |
+| 4 | 0% |
+| 5 | 0% |
+| 6 | 0% |
+| 7 | 0% |
+| 8 | 0% |
+| >8 | 0% |
+
+</details>
+
+</details>
 
 
 
